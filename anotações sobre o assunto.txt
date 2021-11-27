@@ -1,0 +1,10 @@
+
+traceroute - permite descobrir a rota que os pacotes seguem até chegar a um destino.
+
+ttl - time to live
+    - limita quanto "tempo" o pacote vive
+    - basicamente, você passa um número que representa por quantos roteadores um pacote pode passar (saltos)
+com cerca de 30 saltos, você consegue acesar,praticamente, todos os roteadores do mundo
+    - (por isso, esse valor é muito usado como padrão)
+
+
