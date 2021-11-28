@@ -48,7 +48,6 @@ class Tracer(object):
         print(text)
 
         while True:
-            print("ttl: ", self.ttl)
             receiver = self.create_receiver() 
             sender = self.create_sender()
             sender.sendto(b'', (self.dst, self.port))
@@ -114,7 +113,6 @@ class Tracer(object):
 
         return s
 
-if __name__ == '__main__':
-    tracer = Tracer('www.globo.com', hops=30)
 
-    tracer.run()
+tracer = Tracer('200.133.2.18')
+tracer.run()
