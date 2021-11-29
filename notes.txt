@@ -1,0 +1,114 @@
+__________________________________________________________________________________________________________
+
+    NESTE ARQUIVO, HÁ TODO O CONHECIMENTO E EXPLICAÇÕES SOBRE O ASSUNTO EM GERAL E O CÓDIGO DA main.py
+__________________________________________________________________________________________________________
+
+_____________
+
+    GERAL
+_____________
+
+
+traceroute - permite descobrir a rota que os pacotes seguem até chegar a um destino.
+
+ttl - time to live
+    - limita quanto "tempo" o pacote vive
+    - basicamente, você passa um número que representa por quantos roteadores um pacote pode passar (saltos)
+com cerca de 30 saltos, você consegue acesar,praticamente, todos os roteadores do mundo
+    - (por isso, esse valor é muito usado como padrão)
+
+
+Protocolos
+    - São regras que definem o funcionamento de uma rede.
+
+    - TCP/IP -> Família de protocolos mais conhecida (IP, TCP, UDP, HTTP)
+
+    - O modelo TCP/IP é muito inspirado pelo modelo OSI e se diferencia pois é dividido em apenas 5 camadas.
+        No modelo OSI as últimas camadas são de aplicação, apresentação e sessão, já no TCP/IP, isso é condensado
+        em apenas uma camada de aplicação
+
+    - Camade de transporte -> é a responsável pela transferência de dados entre diferentes máquinas (seja um 
+        servidor, ou mesmo um computador pessoal).
+
+    - Handshake -> é o processo pelo qual duas ou mais máquinas afirmam que reconheceram umas às outras e estão 
+        prontas para iniciar a comunicação.
+
+    - Handshake triplo -> Utilizado no protocolo TCP, pode ser dividido em 3 passos:
+        - 1. Alice envia a Bob um "synchronize" -> SYN que possui uma sequencia de números (x) passada
+        - 2. Bob responde a alice um "synchronize-acknowledgment" -> SYN-ACK que possui sua própria sequencia (y)
+            e acknowledgement x + 1
+        - 3. Alice responde a Bob apenas um "acknowledgment" -> ACK que possui o y + 1, o qual Bob não precisa
+            responder
+        Demonstração:
+        https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Three-way-handshake-example.gif/750px-Three-way-handshake-example.gif
+
+    - IP -> Internet Protocol, é o mais importante protocolo da família TCP/IP, ele se localiza na camada de rede
+        e ele deve ser associado com outros protocolos.
+    
+    TCP e UDP se encontram na camada de transporte
+
+    - TCP -> Protocolo de controle de transmissão, se destaca quando buscamos confiabilidade e garantia na entrega
+        das informações. 
+        - Com o TCP, de fato temos uma conexão entre um ponto e outro, comumente chamados de servidor e cliente. 
+            É interessante notar que o TCP permite o envio simultâneo de dados de ambos os pontos ao outro, durante 
+            todo o fluxo de comunicação.
+            https://dkrn4sk0rn31v.cloudfront.net/2019/06/01124308/tcp.png
+        - Utiliza o Handshake triplo para garantir a confiabilidade dos dados.
+        - Resumo:
+            * Orientado à conexão (só transmite dados se uma conexão for estabelecida depois de um Three-way Handshake);
+            * É Full-duplex, ou seja, permite que as duas máquinas envolvidas transmitam e recebam ao mesmo tempo;
+            * Garante a entrega, sequência (os dados são entregues de forma ordenada), não duplicação e não corrompimento;
+            * Automaticamente divide as informações em pequenos pacotes;
+            * Garante equilíbrio no envio dos dados (para não causar “sobrecarga” na comunicação);
+
+
+    - UDP -> Protocolo de datagrama do usuário, se destaca na velocidade de entrega dos pacotes de dados. Tráfego
+        de voz, tráfego de vídeo e jogos online têm boa aplicabilidade com o UDP.
+        - o UDP tem sua grande vantagem quando se trata de serviços cuja velocidade é fundamental e a perda mínima
+            de dados não muito desvantajosa.
+        - Datagrama -> Consiste de um cabeçalho (contém informações para o roteamento da origem para o destino) e 
+            uma área de dados.
+            Datagrama pode ser grosseiramente resumido como um entidade de dados que não é muito confiável.
+        - Como o uso do UDP, pode-se enviar datagramas de uma máquina à outra, mas sem garantia da integridade e
+            ordem dos dados.
+        - O UDP é um protocolo que não é voltado à conexão. Isso significa que o handshake não é necessário para 
+            que se estabeleça uma comunicação.
+        - No UDP, a comunicação se dá em uma ponta e, se algum segmento falha, isso é ignorado e o fluxo continua:
+            https://dkrn4sk0rn31v.cloudfront.net/2019/06/01124454/udp.png
+
+        - Resumo UDP:
+            * Diferente do TCP ele não é orientado à conexão;
+            * Não é confiável como o TCP, ele não garante a entrega completa dos dados;
+            * É preciso que dividamos manualmente os dados em datagramas (entidades de dados);
+            * Não garante a sequência da entrega, portanto, os dados podem chegar em uma ordem aleatória
+
+    Por fim, é importante pontuar que tanto o UDP quanto o TCP trabalham com portas, que são elementos lógicos que 
+    interligam clientes e servidores de aplicações em redes TCP/IP. O cliente precisa saber qual porta ele se 
+    conectará no servidor. Por exemplo, servidores web por padrão usam a porta 80 para servir as páginas e quando 
+    acessamos uma página web usando o protocolo http (que é um protocolo de aplicação da TCP/IP) uma conexão TCP à 
+    porta 80 do servidor é feita.
+
+
+    - Socket
+
+
+______________
+
+    CÓDIGO
+______________
+
+
+import socket
+
+import sys
+
+import random
+
+import struct
+
+import time
+
+import re
+
+
+

@@ -1,0 +1,5 @@
+https://pythonawesome.com/a-pure-python-interpretation-of-traceroute/
+https://www.treinaweb.com.br/blog/uma-introducao-a-tcp-udp-e-sockets
+https://www.alura.com.br/artigos/quais-as-diferencas-entre-o-tcp-e-o-udp?gclid=Cj0KCQiA7oyNBhDiARIsADtGRZY2LlHJ1FIUmadgfMawDBau7TFvK7RRojRWQX454AE5tXSA63qnYTsaAoQQEALw_wcB
+https://en.wikipedia.org/wiki/Handshaking#TCP_three-way_handshake
+
