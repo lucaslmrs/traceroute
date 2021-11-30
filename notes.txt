@@ -90,6 +90,12 @@ Protocolos
 
 
     - Socket
+        - Socket provê a comunicação entre duas pontas (fonte e destino) - também conhecido como two-way communication
+        - Um socket que usa rede é um Socket TCP/IP.
+        - Um socket abstrai todas a passagem pela camada de rede e traz uma sensação de que a comunicação entre
+            os envolvidos pareça estar sendo feita de forma direta.
+    
+
 
 
 ______________
@@ -98,17 +104,42 @@ ______________
 ______________
 
 
-import socket
 
-import sys
+def generate_socket_object(self, type, protocol):
+        created_socket = socket.socket(
+            family=socket.AF_INET,
+            type=type,
+            proto=protocol
+        )
+        return created_socket
+    
+    - cria um socket.
+    - family=socket.AF_INET -> AF_INET é a família de endereços da Internet para IPv4
 
-import random
-
-import struct
-
-import time
-
-import re
+    - type -> socket.SOCK_RAW --> SOCK_RAW indica o tipo de socket que vai ser usado e permite um programa prover 
+        cabeçalhos personalizados para um protocolo específico.
+    protocol -> socket.IPPROTO_ICMP --> Internet Control Message Protocol
 
 
 
+
+
+
+
+cada familia de endereços tem um numero de protocolos
+cada protocolo usa um tipo de soquete
+
+AF_INET (todos que usam ipv4) -> SOCK_STREAM (TCP), SOCK_DGRAM (UDP), SOCK_RAW
+
+uma familia de endereços pode conter varios protocolos que usam o mesmo tipo de soquete
+
+o ip suporta algumas opçoes no soquete (voltadas ao protocolo) que podem ser mudadas com setsockopt
+essa funçao passa algumas instruçoes especificas para uma camada especifica da api (que vai variar de acordo com tipo de soquete que a gente usou)
+
+nesse caso, é usado o SOL_IP (que nao eh tao usado mais pq nao eh portavel, se usa o IPPROTO_IP) -> https://man7.org/linux/man-pages/man7/ip.7.html
+
+
+ethernet protocol number -> https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+
+explicaçao -> https://pubs.opengroup.org/onlinepubs/009695299/functions/xsh_chap02_10.html
+[10:43] Will: AF -> address family

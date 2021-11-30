@@ -133,7 +133,7 @@ class Tracer():
 
             # O processo resultará em erro se a resposta não puder ser recebida.
             except socket.error:
-                print("Os dados não foram recebidos.")
+                print("Os dados não foram recebidos.", end='')
                 pass
         
             #Concluimos fechando os sockets.
@@ -151,11 +151,11 @@ class Tracer():
 
                 # Dados do tracing
                 if n_packets == 1:
-                    string_data = ('Número de hops: ' + str(def_ttl) + ' | RTT Primeiro pacote: ' + str(rtt_reg) + ' ms |')
-                elif n_packets == 2:
-                    string_data += (' RTT Segundo pacote: ' + str(rtt_reg) + ' ms |')
+                    string_data = (str(def_ttl) + ' | RTT 1º pacote: ' + str(rtt_reg) + ' ms |')
+                elif n_packets == 2:    
+                    string_data += (' RTT 2º pacote: ' + str(rtt_reg) + ' ms |')
                 elif n_packets == 3:
-                    string_data += (' RTT Terceiro Pacote: ' + str(rtt_reg) + ' ms | IP do Roteador: (' + str(address[0]) + ')')
+                    string_data += (' RTT 3º Pacote: ' + str(rtt_reg) + ' ms | IP do Roteador: (' + str(address[0]) + ')')
                     print(string_data)
 
                 # Quando o host de destino é alcançado, finaliza.
