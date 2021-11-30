@@ -158,6 +158,7 @@ class Tracer():
                     string_data += (' RTT 3º Pacote: ' + str(rtt_reg) + ' ms | IP do Roteador: (' + str(address[0]) + ')')
                     print(string_data)
 
+
                 # Quando o host de destino é alcançado, finaliza.
                 if address[0] == ip_of_dest:
                     break

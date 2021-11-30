@@ -143,3 +143,41 @@ ethernet protocol number -> https://www.iana.org/assignments/protocol-numbers/pr
 
 explicaçao -> https://pubs.opengroup.org/onlinepubs/009695299/functions/xsh_chap02_10.html
 [10:43] Will: AF -> address family
+
+
+generate_receiver
+    SOCK_RAW -> tipo de socket que vai ser usado pelo protocolo IPPROTO_ICMP
+        - o protocolo faz o uso do socket para abstrair a comunicação entre as duas pontas
+        
+    IPPROTO_ICMP -> protocolo que retorna um aviso dizendo como está a conexão ao passar por cada roteador
+
+    setsockopt
+        SOL_SOCKET -> Camada que vai ser alterada
+        SO_RCVTIMEO -> O que vai ser mudado
+        timeout -> o novo valor
+
+    bind
+        - conecta o socket a uma porta para ficar escutando
+        - '' -> endereço que ele escuta, ou seja, ao passar vazio ele escuta em todos os endereços
+        - port -> a porta que o socket vai ficar escutando
+
+generate_sender
+    SOCK_DGRAM -> tipo de socket que vai servir para enviar a mensagem
+
+    IPPROTO_UDP -> protocolo que vai enviar a mensagem
+
+    setsockopt
+        SOL_IP -> Camada que vai ser alterada
+        IP_TTL -> O que vai ser mudado
+        ttl -> o novo valor
+
+
+
+trace
+
+ttl -> numero de hops que aquela execução vai realizar
+
+route_to_trace -> link ou ip passado como argumento
+
+
+
